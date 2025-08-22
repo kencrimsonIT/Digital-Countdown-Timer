@@ -24,8 +24,8 @@ const CountdownTimer = ({initialSeconds}) => {
 
     return (
         <div className="timer-container">
-            <TimeUnit value={hours} />
-            <TimeUnit value={minutes} />
+            <TimeUnit value={hours} separator/>
+            <TimeUnit value={minutes} separator/>
             <TimeUnit value={seconds} />
         </div>
     );
