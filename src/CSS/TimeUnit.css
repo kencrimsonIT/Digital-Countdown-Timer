@@ -1,0 +1,9 @@
+.time-unit-container {
+    margin: 0 10px;
+    text-align: center;
+}
+
+.time-unit-value {
+    font-size: 100px;
+    font-weight: bold;
+}
