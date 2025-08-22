@@ -1,10 +1,10 @@
 import React from "react";
 import "../CSS/TimeUnit.css";
 
-const TimeUnit = () => {
+const TimeUnit = ({value}) => {
     return (
-        <div>
-
+        <div className="time-unit-container">
+            <div className="time-unit-value">{value}</div>
         </div>
     );
 }
