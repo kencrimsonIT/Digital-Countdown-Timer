@@ -1,6 +1,7 @@
 import React from "react";
 import CountdownTimer from './Components/CountdownTimer.jsx';
 import {createGlobalStyle} from "styled-components";
+import {MediaButtons} from "./Components/MediaButtons";
 import './App.css';
 
 const GlobalStyle = createGlobalStyle`
@@ -16,6 +17,9 @@ function App() {
     <div className="timer">
         <GlobalStyle />
         <CountdownTimer initialSeconds={0} />
+        <div className="media-btn-container">
+            <MediaButtons />
+        </div>
     </div>
   );
 }
