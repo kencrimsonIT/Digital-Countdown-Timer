@@ -1,12 +1,15 @@
 .increase-btn {
-    background: none;
-    border: 2px solid #333;
+    background: #fff;
+    border: none;
     width: 40px;
-    height: 30px;
+    height: 40px;
     cursor: pointer;
     position: relative;
     margin-bottom: 0.5rem;
     transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .increase-btn::before {
@@ -19,5 +22,5 @@
     height: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-bottom: 12px solid #333;
+    border-bottom: 12px solid #000;
 }
