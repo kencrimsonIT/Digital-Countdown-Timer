@@ -15,7 +15,7 @@ function App() {
   return (
     <div className="timer">
         <GlobalStyle />
-        <CountdownTimer initialSeconds={86400} />
+        <CountdownTimer initialSeconds={0} />
     </div>
   );
 }
