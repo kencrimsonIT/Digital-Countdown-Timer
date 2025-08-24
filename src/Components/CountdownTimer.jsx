@@ -1,29 +1,53 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef, forwardRef, useImperativeHandle} from "react";
 import TimeUnit from "../Components/TimeUnit.jsx";
 import IncreaseButton from "../Components/IncreaseButton.jsx";
 import DecreaseButton from "../Components/DecreaseButton.jsx";
 import "../CSS/CountdownTimer.css";
 
-const CountdownTimer = ({initialSeconds}) => {
+const CountdownTimer = forwardRef(({ initialSeconds }, ref) => {
     const [timeLeft, setTimeLeft] = useState(initialSeconds);
     const [isRunning, setIsRunning] = useState(false);
+    const timerRef = useRef(null);
+
+    useImperativeHandle(ref, () => ({
+        start() {
+            if (timeLeft > 0) {
+                setIsRunning(true);
+            }
+        },
+        pause() {
+            setIsRunning(false);
+        },
+        stop() {
+            setIsRunning(false);
+            setTimeLeft(initialSeconds);
+        }
+    }));
 
     useEffect(() => {
-        let timer;
         if (isRunning && timeLeft > 0) {
-            timer = setInterval(() => {
-                setTimeLeft(previous => (previous > 0 ? previous - 1 : 0));
+            timerRef.current = setInterval(() => {
+                setTimeLeft(previous => {
+                    if (previous <= 1) {
+                        setIsRunning(false);
+                        return 0;
+                    }
+                    return previous - 1;
+                });
             }, 1000);
+        } else {
+            clearInterval(timerRef.current);
         }
-        return () => clearInterval(timer);
+
+        return () => clearInterval(timerRef.current);
     }, [isRunning, timeLeft]);
 
     const formatTimer = (secs) => {
         const validSecs = Math.max(0, Math.floor(secs || 0));
-        const hours = String (Math.floor(validSecs / 3600)).padStart(2, "0");
-        const minutes = String (Math.floor((validSecs % 3600) / 60)).padStart(2, "0");
-        const seconds = String (Math.floor(validSecs % 60)).padStart(2, "0");
-        return {hours, minutes, seconds};
+        const hours = String(Math.floor(validSecs / 3600)).padStart(2, "0");
+        const minutes = String(Math.floor((validSecs % 3600) / 60)).padStart(2, "0");
+        const seconds = String(Math.floor(validSecs % 60)).padStart(2, "0");
+        return { hours, minutes, seconds };
     };
 
     const hoursIncrease = () => {
@@ -58,8 +82,9 @@ const CountdownTimer = ({initialSeconds}) => {
             if (currentMinutes < 59) {
                 return validPrev + 60;
             }
-        })
-    }
+            return validPrev;
+        });
+    };
 
     const minutesDecrease = () => {
         setIsRunning(false);
@@ -69,8 +94,9 @@ const CountdownTimer = ({initialSeconds}) => {
             if (currentMinutes > 0) {
                 return validPrev - 60;
             }
-        })
-    }
+            return validPrev;
+        });
+    };
 
     const secondsIncrease = () => {
         setIsRunning(false);
@@ -80,8 +106,9 @@ const CountdownTimer = ({initialSeconds}) => {
             if (currenSeconds < 59) {
                 return validPrev + 1;
             }
-        })
-    }
+            return validPrev;
+        });
+    };
 
     const secondsDecrease = () => {
         setIsRunning(false);
@@ -91,10 +118,11 @@ const CountdownTimer = ({initialSeconds}) => {
             if (currenSeconds > 0) {
                 return validPrev - 1;
             }
-        })
-    }
+            return validPrev;
+        });
+    };
 
-    const {hours, minutes, seconds} = formatTimer(timeLeft);
+    const { hours, minutes, seconds } = formatTimer(timeLeft);
 
     return (
         <>
@@ -105,9 +133,9 @@ const CountdownTimer = ({initialSeconds}) => {
             </div>
 
             <div className="timer-container">
-                <TimeUnit value={hours} separator/>
-                <TimeUnit value={minutes} separator/>
-                <TimeUnit value={seconds}/>
+                <TimeUnit value={hours} separator />
+                <TimeUnit value={minutes} separator />
+                <TimeUnit value={seconds} />
             </div>
 
             <div className="decrease-btn-container">
@@ -117,6 +145,6 @@ const CountdownTimer = ({initialSeconds}) => {
             </div>
         </>
     );
-}
+});
 
 export default CountdownTimer;
