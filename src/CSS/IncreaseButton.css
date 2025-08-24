@@ -1,6 +1,6 @@
 .increase-btn {
-    background: #fff;
-    border: none;
+    background: var(--btn-bg, #fff);
+    border: 2px solid var(--btn-border, #ddd);
     width: 40px;
     height: 40px;
     cursor: pointer;
@@ -10,6 +10,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 4px;
 }
 
 .increase-btn::before {
@@ -22,5 +23,33 @@
     height: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-bottom: 12px solid #000;
+    border-bottom: 12px solid var(--btn-arrow-color, #000);
+}
+
+.increase-btn:hover {
+    background: var(--btn-bg-hover, #f0f0f0);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px var(--btn-shadow-hover, rgba(0, 0, 0, 0.15));
+}
+
+.increase-btn:active {
+    transform: translateY(0);
+}
+
+/*Light theme*/
+[data-theme='light'] .increase-btn {
+    --btn-bg: #ffffff;
+    --btn-border: #e0e0e0;
+    --btn-bg-hover: #f0f0f0;
+    --btn-shadow-hover: rgba(0, 0, 0, 0.15);
+    --btn-arrow-color: #333333;
+}
+
+/*Dark theme*/
+[data-theme='dark'] .increase-btn {
+    --btn-bg: #2a2a2a;
+    --btn-border: #404040;
+    --btn-bg-hover: #3a3a3a;
+    --btn-shadow-hover: rgba(0, 0, 0, 0.3);
+    --btn-arrow-color: #ffffff;
 }
