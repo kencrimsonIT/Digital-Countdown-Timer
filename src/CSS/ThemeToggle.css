@@ -1,0 +1,68 @@
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--toggle-bg, #f0f0f0);
+    border: 2px solid var(--toggle-border, #ddd);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    box-shadow: 0 2px 8px var(--toggle-shadow, rgba(0, 0, 0, 0.1));
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px var(--toggle-shadow-hover, rgba(0, 0, 0, 0.2));
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+.theme-toggle svg {
+    color: var(--toggle-icon-color, #333);
+    transition: color 0.3s ease;
+}
+
+/* Light theme styles */
+[data-theme="light"] {
+    --toggle-bg: #ffffff;
+    --toggle-border: #e0e0e0;
+    --toggle-shadow: rgba(0, 0, 0, 0.1);
+    --toggle-shadow-hover: rgba(0, 0, 0, 0.2);
+    --toggle-icon-color: #333333;
+}
+
+/* Dark theme styles */
+[data-theme="dark"] {
+    --toggle-bg: #2a2a2a;
+    --toggle-border: #404040;
+    --toggle-shadow: rgba(0, 0, 0, 0.3);
+    --toggle-shadow-hover: rgba(0, 0, 0, 0.5);
+    --toggle-icon-color: #fff;
+}
+
+/* Animation for icon change */
+.theme-toggle svg {
+    animation: iconPop 0.3s ease;
+}
+
+@keyframes iconPop {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
