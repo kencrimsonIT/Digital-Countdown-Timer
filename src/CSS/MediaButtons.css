@@ -1,23 +1,90 @@
 .play-btn, .stop-btn, .pause-btn {
     position: relative;
-    background: #fff;
-    border: none;
+    background: var(--media-btn-bg, #fff);
+    border: 2px solid var(--media-btn-border, #ddd);
     width: 50px;
     height: 50px;
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.2s ease;
-}
-
-.play-btn::before, .stop-btn::before, .pause-btn::before {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    content: '';
-    transform: translate(-50%, -50%);
-    font-size: 20px;
+    margin: 0 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .play-btn:hover, .stop-btn:hover, .pause-btn:hover {
-    background: #f3f3f3;
+    background: var(--media-btn-bg-hover, #f0f0f0);
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px var(--media-btn-shadow-hover, rgba(0, 0, 0, 0.2));
+}
+
+.play-btn:active, .stop-btn:active, .pause-btn:active {
+    transform: scale(0.95);
+}
+
+/* Play button - Triangle */
+.play-btn::before {
+    content: '▶';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-45%, -50%);
+    font-size: 16px;
+    color: var(--media-btn-icon-color, #000);
+    line-height: 1;
+}
+
+.play-btn::after {
+    content: '';
+}
+
+/* Stop button - Square */
+.stop-btn::before {
+    content: '⏹';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    color: var(--media-btn-icon-color, #000);
+    line-height: 1;
+}
+
+.stop-btn::after {
+    content: '';
+}
+
+/* Pause button - Two bars */
+.pause-btn::before {
+    content: '⏸';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    color: var(--media-btn-icon-color, #000);
+    line-height: 1;
+}
+
+.pause-btn::after {
+    content: '';
+}
+
+/* Light theme */
+[data-theme="light"] {
+    --media-btn-bg: #ffffff;
+    --media-btn-border: #e0e0e0;
+    --media-btn-bg-hover: #f0f0f0;
+    --media-btn-shadow-hover: rgba(0, 0, 0, 0.2);
+    --media-btn-icon-color: #333333;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+    --media-btn-bg: #2a2a2a;
+    --media-btn-border: #404040;
+    --media-btn-bg-hover: #3a3a3a;
+    --media-btn-shadow-hover: rgba(0, 0, 0, 0.4);
+    --media-btn-icon-color: #ffffff;
 }
