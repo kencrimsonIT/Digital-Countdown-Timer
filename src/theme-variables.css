@@ -1,0 +1,83 @@
+/* Global theme variables */
+:root {
+    /* Light theme (default) */
+    --app-bg: #ffffff;
+    --app-text: #333333;
+    --app-secondary-text: #666666;
+
+    /* Timer display */
+    --timer-bg: #f8f9fa;
+    --timer-text: #1a1a1a;
+    --timer-border: #e9ecef;
+
+    /* Buttons */
+    --btn-bg: #ffffff;
+    --btn-text: #333333;
+    --btn-border: #e0e0e0;
+    --btn-shadow: rgba(0, 0, 0, 0.1);
+    --btn-hover-bg: #f0f0f0;
+    --btn-hover-shadow: rgba(0, 0, 0, 0.15);
+
+    /* Media buttons */
+    --media-btn-bg: #ffffff;
+    --media-btn-border: #e0e0e0;
+    --media-btn-bg-hover: #f0f0f0;
+    --media-btn-shadow-hover: rgba(0, 0, 0, 0.2);
+    --media-btn-icon-color: #333333;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+    --app-bg: #1a1a1a;
+    --app-text: #ffffff;
+    --app-secondary-text: #cccccc;
+
+    /* Timer display */
+    --timer-bg: #2d2d2d;
+    --timer-text: #ffffff;
+    --timer-border: #404040;
+
+    /* Buttons */
+    --btn-bg: #2a2a2a;
+    --btn-text: #ffffff;
+    --btn-border: #404040;
+    --btn-shadow: rgba(0, 0, 0, 0.3);
+    --btn-hover-bg: #3a3a3a;
+    --btn-hover-shadow: rgba(0, 0, 0, 0.4);
+
+    /* Media buttons */
+    --media-btn-bg: #2a2a2a;
+    --media-btn-border: #404040;
+    --media-btn-bg-hover: #3a3a3a;
+    --media-btn-shadow-hover: rgba(0, 0, 0, 0.4);
+    --media-btn-icon-color: #ffffff;
+}
+
+/* Smooth transitions for theme switching */
+* {
+    transition: background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Media buttons container styling */
+.media-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-top: 2rem;
+    padding: 1rem;
+}
+
+/* Timer specific styling enhancements */
+.timer {
+    background: var(--app-bg);
+    color: var(--app-text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

@@ -126,11 +126,13 @@ const CountdownTimer = forwardRef(({ initialSeconds }, ref) => {
 
     return (
         <>
-            <div className="increase-btn-container">
-                <IncreaseButton onIncrease={hoursIncrease} />
-                <IncreaseButton onIncrease={minutesIncrease} />
-                <IncreaseButton onIncrease={secondsIncrease} />
-            </div>
+            {!isRunning && (
+                <div className="increase-btn-container">
+                    <IncreaseButton onIncrease={hoursIncrease} />
+                    <IncreaseButton onIncrease={minutesIncrease} />
+                    <IncreaseButton onIncrease={secondsIncrease} />
+                </div>
+            )}
 
             <div className="timer-container">
                 <TimeUnit value={hours} separator />
@@ -138,11 +140,13 @@ const CountdownTimer = forwardRef(({ initialSeconds }, ref) => {
                 <TimeUnit value={seconds} />
             </div>
 
-            <div className="decrease-btn-container">
-                <DecreaseButton onDecrease={hoursDecrease} />
-                <DecreaseButton onDecrease={minutesDecrease} />
-                <DecreaseButton onDecrease={secondsDecrease} />
-            </div>
+            {!isRunning && (
+                <div className="decrease-btn-container">
+                    <DecreaseButton onDecrease={hoursDecrease} />
+                    <DecreaseButton onDecrease={minutesDecrease} />
+                    <DecreaseButton onDecrease={secondsDecrease} />
+                </div>
+            )}
         </>
     );
 });
