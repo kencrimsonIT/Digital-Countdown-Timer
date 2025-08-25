@@ -4,6 +4,7 @@ import {createGlobalStyle} from "styled-components";
 import {MediaButtons} from "./Components/MediaButtons";
 import {ThemeController, useTheme} from "./Components/ThemeContext";
 import ThemeToggle from "./Components/ThemeToggle";
+import ResetButton from "./Components/ResetButton";
 import './App.css';
 import './theme-variables.css';
 
@@ -48,6 +49,7 @@ const AppContent = () => {
     const {theme} = useTheme();
     const timerRef = React.useRef(null);
     const [isRunning, setIsRunning] = React.useState(false);
+    const [isFinished, setIsFinished] = React.useState(false);
 
     React.useEffect(() => {
         document.documentElement.setAttribute('data-theme', theme)
@@ -57,17 +59,39 @@ const AppContent = () => {
     const handlePlay = () => {
         timerRef.current?.start();
         setIsRunning(true);
+        setIsFinished(false);
     };
 
     const handleStop = () => {
         timerRef.current?.stop();
         setIsRunning(false);
+        setIsFinished(false);
     };
 
     const handlePause = () => {
         timerRef.current?.pause();
         setIsRunning(false);
+        setIsFinished(false);
     };
+
+    // Reset button handler
+    const handleReset = () => {
+        timerRef.current?.reset();
+        setIsRunning(false);
+        setIsFinished(false);
+    }
+
+    React.useEffect(() => {
+        const checkFinished = () => {
+            if (timerRef.current?.isFinished()) {
+                setIsFinished(true);
+                setIsRunning(false);
+            }
+        };
+
+        const interval = setInterval(checkFinished, 500);
+        return () => clearInterval(interval);
+    }, []);
 
     return (
         <div className="timer">
@@ -75,12 +99,25 @@ const AppContent = () => {
             <ThemeToggle />
             <CountdownTimer ref={timerRef} initialSeconds={0} />
             <div className="media-btn-container">
-                <MediaButtons
-                    onPlay={handlePlay}
-                    onPause={handlePause}
-                    onStop={handleStop}
-                    isRunning={isRunning}
-                />
+                {(!isRunning && !isFinished) && (
+                    <MediaButtons
+                        onPlay={handlePlay}
+                        onPause={handlePause}
+                        onStop={handleStop}
+                        isRunning={isRunning}
+                    />
+                )}
+                {(isRunning && !isFinished) && (
+                    <MediaButtons
+                        onPlay={handlePlay}
+                        onPause={handlePause}
+                        onStop={handleStop}
+                        isRunning={isRunning}
+                    />
+                )}
+                {isFinished && (
+                    <ResetButton onReset={handleReset}/>
+                )}
             </div>
         </div>
     );
