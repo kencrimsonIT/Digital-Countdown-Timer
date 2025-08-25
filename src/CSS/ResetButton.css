@@ -1,0 +1,47 @@
+.reset-btn {
+    position: relative;
+    background: var(--media-btn-bg, #fff);
+    border: 2px solid var(--media-btn-border, #ddd);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 0 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reset-btn:hover {
+    background: var(--media-btn-bg-hover, #f0f0f0);
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px var(--media-btn-shadow-hover, rgba(0, 0, 0, 0.2));
+}
+
+.reset-btn:active {
+    transform: scale(0.95);
+}
+
+.reset-btn svg {
+    color: var(--reset-btn-icon-color, #333333);
+    transition: color 0.2s ease;
+}
+
+/*Light theme*/
+[data-theme="light"] {
+    --reset-btn-bg: #ffffff;
+    --reset-btn-border: #e0e0e0;
+    --reset-btn-bg-hover: #f0f0f0;
+    --reset-btn-shadow-hover: rgba(0, 0, 0,  0.2);
+    --reset-btn-icon-color: #333333;
+}
+
+/*Dark theme*/
+[data-theme="dark"] {
+    --reset-btn-bg: #2a2a2a;
+    --reset-btn-border: #404040;
+    --reset-btn-bg-hover: #3a3a3a;
+    --reset-btn-shadow-hover: rgba(0, 0, 0, 0.4);
+    --reset-btn-icon-color: #ffffff;
+}
