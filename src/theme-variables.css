@@ -24,6 +24,13 @@
     --media-btn-bg-hover: #f0f0f0;
     --media-btn-shadow-hover: rgba(0, 0, 0, 0.2);
     --media-btn-icon-color: #333333;
+
+    /* Reset button */
+    --reset-btn-bg:#ffffff;
+    --reset-btn-border: #e0e0e0;
+    --reset-btn-bg-hover: #f0f0f0;
+    --reset-btn-shadow-hover: rgba(0, 0, 0,  0.2);
+    --reset-btn-icon-color: #333333;
 }
 
 /* Dark theme */
@@ -51,6 +58,13 @@
     --media-btn-bg-hover: #3a3a3a;
     --media-btn-shadow-hover: rgba(0, 0, 0, 0.4);
     --media-btn-icon-color: #ffffff;
+
+    /* Reset button */
+    --reset-btn-bg: #2a2a2a;
+    --reset-btn-border: #404040;
+    --reset-btn-bg-hover: #3a3a3a;
+    --reset-btn-shadow-hover: rgba(0, 0, 0, 0.4);
+    --reset-btn-icon-color: #ffffff;
 }
 
 /* Smooth transitions for theme switching */
