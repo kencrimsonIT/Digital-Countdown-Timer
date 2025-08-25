@@ -7,12 +7,14 @@ import "../CSS/CountdownTimer.css";
 const CountdownTimer = forwardRef(({ initialSeconds }, ref) => {
     const [timeLeft, setTimeLeft] = useState(initialSeconds);
     const [isRunning, setIsRunning] = useState(false);
+    const [isFinished, setIsFinished] = useState(false);
     const timerRef = useRef(null);
 
     useImperativeHandle(ref, () => ({
         start() {
             if (timeLeft > 0) {
                 setIsRunning(true);
+                setIsFinished(false);
             }
         },
         pause() {
@@ -21,6 +23,15 @@ const CountdownTimer = forwardRef(({ initialSeconds }, ref) => {
         stop() {
             setIsRunning(false);
             setTimeLeft(initialSeconds);
+            setIsFinished(false);
+        },
+        reset() {
+            setIsRunning(false);
+            setTimeLeft(initialSeconds);
+            setIsFinished(false);
+        },
+        isFinished() {
+            return isFinished;
         }
     }));
 
@@ -30,6 +41,7 @@ const CountdownTimer = forwardRef(({ initialSeconds }, ref) => {
                 setTimeLeft(previous => {
                     if (previous <= 1) {
                         setIsRunning(false);
+                        setIsFinished(true);
                         return 0;
                     }
                     return previous - 1;
@@ -52,6 +64,7 @@ const CountdownTimer = forwardRef(({ initialSeconds }, ref) => {
 
     const hoursIncrease = () => {
         setIsRunning(false);
+        setIsFinished(false);
         setTimeLeft(prev => {
             const validPrev = Math.max(0, prev || 0);
             const currentHours = Math.floor(validPrev / 3600);
@@ -64,6 +77,7 @@ const CountdownTimer = forwardRef(({ initialSeconds }, ref) => {
 
     const hoursDecrease = () => {
         setIsRunning(false);
+        setIsFinished(false);
         setTimeLeft(prev => {
             const validPrev = Math.max(0, prev || 0);
             const currentHours = Math.floor(validPrev / 3600);
@@ -76,6 +90,7 @@ const CountdownTimer = forwardRef(({ initialSeconds }, ref) => {
 
     const minutesIncrease = () => {
         setIsRunning(false);
+        setIsFinished(false);
         setTimeLeft(prev => {
             const validPrev = Math.max(0, prev || 0);
             const currentMinutes = Math.floor((validPrev % 3600) / 60);
@@ -88,6 +103,7 @@ const CountdownTimer = forwardRef(({ initialSeconds }, ref) => {
 
     const minutesDecrease = () => {
         setIsRunning(false);
+        setIsFinished(false);
         setTimeLeft(prev => {
             const validPrev = Math.max(0, prev || 0);
             const currentMinutes = Math.floor((validPrev % 3600) / 60);
@@ -100,6 +116,7 @@ const CountdownTimer = forwardRef(({ initialSeconds }, ref) => {
 
     const secondsIncrease = () => {
         setIsRunning(false);
+        setIsFinished(false);
         setTimeLeft(prev => {
             const validPrev = Math.max(0, prev || 0);
             const currenSeconds = validPrev % 60;
@@ -112,6 +129,7 @@ const CountdownTimer = forwardRef(({ initialSeconds }, ref) => {
 
     const secondsDecrease = () => {
         setIsRunning(false);
+        setIsFinished(false);
         setTimeLeft(prev => {
             const validPrev = Math.max(0, prev || 0);
             const currenSeconds = validPrev % 60;
@@ -126,7 +144,7 @@ const CountdownTimer = forwardRef(({ initialSeconds }, ref) => {
 
     return (
         <>
-            {!isRunning && (
+            {(!isRunning && !isFinished) && (
                 <div className="increase-btn-container">
                     <IncreaseButton onIncrease={hoursIncrease} />
                     <IncreaseButton onIncrease={minutesIncrease} />
@@ -140,7 +158,7 @@ const CountdownTimer = forwardRef(({ initialSeconds }, ref) => {
                 <TimeUnit value={seconds} />
             </div>
 
-            {!isRunning && (
+            {(!isRunning && !isFinished) && (
                 <div className="decrease-btn-container">
                     <DecreaseButton onDecrease={hoursDecrease} />
                     <DecreaseButton onDecrease={minutesDecrease} />
